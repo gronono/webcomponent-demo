@@ -81,7 +81,7 @@ export class RandCard extends HTMLElement {
      */
     _updateSeed(seed) {
         this._fetchData(seed)
-            .then(this._updateData.bind(this));
+            .then(data => this._updateData(data));
     }
 
     /**
@@ -93,7 +93,7 @@ export class RandCard extends HTMLElement {
         this.shadowRoot.querySelector('#name').textContent = `${name.title} ${name.first} ${name.last}`;
         // street.number contains 4 digits which is improbable in France
         // Use of the first two for more realism
-        const streetNumber = location.street.number > 1000 ? Math.floor(location.street.number / 1000) : location.street.number;
+        const streetNumber = location.street.number > 1000 ? Math.floor(location.street.number / 100) : location.street.number;
         this.shadowRoot.querySelector('#address').textContent = `${streetNumber} ${location.street.name}\n${location.postcode} ${location.city}`;
         this.shadowRoot.querySelector('#email').textContent = email;
         this.shadowRoot.querySelector('#phone').textContent = cell.replace(/-/g, ' ');
