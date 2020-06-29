@@ -11,13 +11,14 @@ template.innerHTML = `
         text-align: center;
     }
 
-    #generate {
+    button {
         padding: 0 20px;
     }
 </style>
 
 <input id="seed" type="text" value="fea8be3e64777240"/>
-<button id="generate">Générer</button>
+<button id="generate">Randomize</button>
+<button id="play">Play</button>
 `;
 
 export class RandToolbar extends HTMLElement {

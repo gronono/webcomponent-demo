@@ -10,10 +10,10 @@ template.innerHTML = `
         font-family: Ubuntu,sans-serif;
         margin-left: auto;
         margin-right: auto;
-        width: 350px;
+        width: 400px;
     }
 </style>
-<rand-card></rand-card>
+<rand-card seed=""></rand-card>
 <rand-toolbar></rand-toolbar>
 `;
 
@@ -23,6 +23,19 @@ export class RandApp extends HTMLElement {
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
+
+    connectedCallback() {
+        const updateSeed = () => {
+            const seed = Date.now();
+            this.shadowRoot.querySelector('rand-card').setAttribute('seed', seed);
+        };
+        this.timer = setInterval(updateSeed, 10000);
+    }
+
+    disconnectedCallback() {
+        clearInterval(this.timer);
+    }
 }
 
 customElements.define('rand-app', RandApp);
+
